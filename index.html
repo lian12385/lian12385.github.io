@@ -4,24 +4,33 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <meta name="renderer" content="webkit">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
     <title>恋爱计时器</title>
     <style>
         body {
             -webkit-font-smoothing: antialiased;
             font-family: Helvetica Neue, Helvetica, Hiragino Sans GB, Microsoft YaHei, Arial, sans-serif;
-            background-image: url('background.png');
             font-size: 85%;
             margin: 0;
+
         }
-        
+
+        .img{
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            display: block;
+            z-index: -100;
+        }
+
         h2 {
             font-size: 220%;
             font-weight: 400;
+            /*color: yellow;*/
         }
-        
+
         .content {
             position: absolute;
             width: 100%;
@@ -29,13 +38,22 @@
             transform: translate(0, -50%);
             text-align: center;
         }
-        
+
         .timer {
             font-size: 180%;
             line-height: 1.5;
             margin: 1em 0;
         }
-        
+        span{
+            color: red;
+        }
+        .span1{
+            color: rgb(77, 115, 148);
+        }
+        .span2{
+            color: rgb(22, 104, 203);
+        }
+
         .timer b {
             color: rgb(253, 99, 125);
         }
@@ -43,47 +61,49 @@
 </head>
 
 <body>
-    <div class="content">
-        <h2>韦伙强  ❤  陈秋儒</h2>
-        <div class="timer">
-            <b id="d"></b> 天 <b id="h"></b> 时 <b id="m"></b> 分 <b id="s"></b> 秒
-        </div>
+<img class="img" src="love.jpg" alt="">
+<div class="content">
+
+    <h2><span class="span1">WHQ</span> <span>❤</span> <span class="span2">CQR</span></h2>
+    <div class="timer">
+        <b id="d"></b> 天 <b id="h"></b> 时 <b id="m"></b> 分 <b id="s"></b> 秒
     </div>
+</div>
+<script>
+    function timer() {
+        var start = new Date(2022, 4, 2); // 2015.7.2
 
-    <script>
-        function timer() {
-            var start = new Date(2022, 4, 2); // 2015.7.2
-
-            var s1 = '2022-04-02';
-            s1 = new Date(s1.replace(/-/g, "/"));
-            s2 = new Date();//当前日期：2017-04-24
-            var days = s2.getTime() - s1.getTime();
-            var time = parseInt(days / (1000 * 60 * 60 * 24));
+        var s1 = '2022-04-02';
+        s1 = new Date(s1.replace(/-/g, "/"));
+        s2 = new Date();//当前日期：2017-04-24
+        var days = s2.getTime() - s1.getTime();
+        var time = parseInt(days / (1000 * 60 * 60 * 24));
 
 
-            var t = new Date() - start;
-            // document.write(t)
-            var h = ~~(t / 1000 / 60 / 60 % 24);
-            if (h < 10) {
-                h = "0" + h;
-            }
-            var m = ~~(t / 1000 / 60 % 60);
-            if (m < 10) {
-                m = "0" + m;
-            }
-
-            var s = ~~(t / 1000 % 60);
-            if (s < 10) {
-                s = "0" + s;
-            }
-            document.getElementById('d').innerHTML = time;
-            document.getElementById('h').innerHTML = h;
-            document.getElementById('m').innerHTML = m;
-            document.getElementById('s').innerHTML = s;
+        var t = new Date() - start;
+        // document.write(t)
+        var h = ~~(t / 1000 / 60 / 60 % 24);
+        if (h < 10) {
+            h = "0" + h;
         }
-        timer();
-        setInterval(timer, 1000);
-    </script>
+        var m = ~~(t / 1000 / 60 % 60);
+        if (m < 10) {
+            m = "0" + m;
+        }
+
+        var s = ~~(t / 1000 % 60);
+        if (s < 10) {
+            s = "0" + s;
+        }
+        document.getElementById('d').innerHTML = time;
+        document.getElementById('h').innerHTML = h;
+        document.getElementById('m').innerHTML = m;
+        document.getElementById('s').innerHTML = s;
+    }
+
+    timer();
+    setInterval(timer, 1000);
+</script>
 </body>
 
 </html>
