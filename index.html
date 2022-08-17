@@ -1,77 +1,89 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
+
 <head>
-	<meta charset="UTF-8">
-	<title></title>
-	<style>
-		body{
-			margin: 0;
-			background-color: #5e5e5e;
-		}
-		#box{
-			width: 857px;
-			height: 574px;
-			padding-top: 126px;
-			padding-left:143px;
-			background: url(img/bg.png) no-repeat;
-			margin: 0 auto;
-		}
-		#wrap{
-			width: 700px;
-			height: 420px;
-			transform-style: preserve-3d;
-			perspective: 800px;
-		}
-		#wrap div{
-			width: 10px;
-			height: 420px;
-			background: url(img/01.png) no-repeat;
-			float: left;
-			transition: .5s;
-		}
-	</style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>恋爱计时器</title>
+    <style>
+        body {
+            -webkit-font-smoothing: antialiased;
+            font-family: Helvetica Neue, Helvetica, Hiragino Sans GB, Microsoft YaHei, Arial, sans-serif;
+            background-image: url('background.png');
+            font-size: 85%;
+            margin: 0;
+        }
+        
+        h2 {
+            font-size: 220%;
+            font-weight: 400;
+        }
+        
+        .content {
+            position: absolute;
+            width: 100%;
+            top: 40%;
+            transform: translate(0, -50%);
+            text-align: center;
+        }
+        
+        .timer {
+            font-size: 180%;
+            line-height: 1.5;
+            margin: 1em 0;
+        }
+        
+        .timer b {
+            color: rgb(253, 99, 125);
+        }
+    </style>
 </head>
+
 <body>
-<div id="box">
-	<div id="wrap">
-	</div>
-</div>
-<script>
-	var wrap = document.getElementById("wrap");
-	var str="";
-	for(var i=0;i<70;i++){
-		str+="<div style='background-position-x:"+i*(-10)+"px'></div>";
-	}
-	wrap.innerHTML=str;
-	var divs=wrap.getElementsByTagName('div');
-	var num=0;
-	var timer=null;
-	var srcNum=2;
-	go();
-	function go(){
-		timer=setInterval(function(){
-			tab(num);
-			num++;
-			if(num==71){
-				clearInterval(timer);
-				srcNum++;
-				if(srcNum==6){
-					srcNum=1;
-				}
-				num=0;
-				setTimeout(go,500);
-			}
-		},100);
-	}
-	function tab(n){
-		if(divs[n-1]){
-			divs[n-1].style.opacity=1;
-		}
-		if(divs[n]){
-			divs[n].style.opacity=0;
-			divs[n].style.backgroundImage='url(img/0'+srcNum+'.png)';
-		}
-	}
-</script>
+    <div class="content">
+        <h2>韦伙强  ❤  陈秋儒</h2>
+        <div class="timer">
+            <b id="d"></b> 天 <b id="h"></b> 时 <b id="m"></b> 分 <b id="s"></b> 秒
+        </div>
+    </div>
+
+    <script>
+        function timer() {
+            var start = new Date(2022, 4, 2); // 2015.7.2
+
+            var s1 = '2022-04-02';
+            s1 = new Date(s1.replace(/-/g, "/"));
+            s2 = new Date();//当前日期：2017-04-24
+            var days = s2.getTime() - s1.getTime();
+            var time = parseInt(days / (1000 * 60 * 60 * 24));
+
+
+            var t = new Date() - start;
+            // document.write(t)
+            var h = ~~(t / 1000 / 60 / 60 % 24);
+            if (h < 10) {
+                h = "0" + h;
+            }
+            var m = ~~(t / 1000 / 60 % 60);
+            if (m < 10) {
+                m = "0" + m;
+            }
+
+            var s = ~~(t / 1000 % 60);
+            if (s < 10) {
+                s = "0" + s;
+            }
+            document.getElementById('d').innerHTML = time;
+            document.getElementById('h').innerHTML = h;
+            document.getElementById('m').innerHTML = m;
+            document.getElementById('s').innerHTML = s;
+        }
+        timer();
+        setInterval(timer, 1000);
+    </script>
 </body>
+
 </html>
